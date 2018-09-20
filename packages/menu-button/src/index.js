@@ -1,6 +1,5 @@
 import React, { createContext } from "react";
 import Portal from "@reach/portal";
-import { Link } from "@reach/router";
 import Rect from "@reach/rect";
 import WindowSize from "@reach/window-size";
 import Component from "@reach/component-component";
@@ -305,70 +304,6 @@ MenuItem.propTypes = {
   _ref: func
 };
 
-let k = () => {};
-
-////////////////////////////////////////////////////////////////////////
-let MenuLink = React.forwardRef(
-  (
-    {
-      onKeyDown,
-      onClick,
-      component: Comp = Link,
-      style,
-      setState,
-      state,
-      index,
-      _ref,
-      ...props
-    },
-    ref
-  ) => (
-    <MenuItem
-      role="none"
-      state={state}
-      setState={setState}
-      index={index}
-      onSelect={k}
-      _ref={k}
-    >
-      <Comp
-        role="menuitem"
-        data-reach-menu-item
-        tabIndex="-1"
-        data-selected={index === state.selectionIndex ? true : undefined}
-        onClick={wrapEvent(onClick, event => {
-          setState(close);
-        })}
-        onKeyDown={wrapEvent(onKeyDown, event => {
-          if (event.key === "Enter") {
-            // prevent MenuItem's preventDefault from firing,
-            // allowing this link to work w/ the keyboard
-            event.stopPropagation();
-          }
-        })}
-        ref={node => {
-          _ref(node);
-          ref && ref(node);
-        }}
-        style={{ ...style }}
-        {...props}
-      />
-    </MenuItem>
-  )
-);
-
-MenuLink.propTypes = {
-  to: string.isRequired,
-  onKeyDown: func,
-  onClick: func,
-  component: oneOfType([string, node]),
-  style: object,
-  setState: func,
-  state: object,
-  index: number,
-  _ref: func
-};
-
 // TODO: Deal with collisions on the bottom, though not as important
 // since focus causes a scroll and will then scroll the page down
 // to the item.
@@ -411,4 +346,4 @@ let getStyles = (buttonRect, menuRect) => {
   }
 };
 
-export { Menu, MenuList, MenuButton, MenuLink, MenuItem };
+export { Menu, MenuList, MenuButton, MenuItem };
